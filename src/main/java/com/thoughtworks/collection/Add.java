@@ -2,10 +2,7 @@ package com.thoughtworks.collection;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Add {
@@ -48,23 +45,33 @@ public class Add {
     }
 
     public double getMedianOfEven(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        List<Integer> evenList=arrayList.stream().filter(e -> e%2==0).sorted().collect(Collectors.toList());
+        int len=evenList.size();
+        if (len%2==0){
+            return (evenList.get(len/2)+evenList.get(len/2-1))/2;
+        }else {
+            return evenList.get(len/2);
+        }
     }
 
     public double getAverageOfEven(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        return arrayList.stream().filter(e -> e%2==0).reduce(0,(avg,current) -> avg+current/2);
     }
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
-        throw new NotImplementedException();
+        if (specialElment%2==1) return false;
+        return arrayList.contains(specialElment);
     }
 
     public List<Integer> getUnrepeatedFromEvenIndex(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        return arrayList.stream().filter(e -> e%2==0).distinct().collect(Collectors.toList());
     }
 
     public List<Integer> sortByEvenAndOdd(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        List<Integer> oddList=arrayList.stream().filter(e -> e%2==1).sorted((e1,e2)-> e1.compareTo(e2)).collect(Collectors.toList());
+        //List<Integer> evenList=arrayList.removeAll(oddList);
+        return oddList;
+
     }
 
 
