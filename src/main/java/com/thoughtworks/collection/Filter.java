@@ -22,11 +22,12 @@ public class Filter {
         return array.stream().filter(e -> e%3==0).collect(Collectors.toList());
     }
 
-    public List<Integer> getCommonElements(List<Integer> firstList, List<Integer> secondList) {
-        throw new NotImplementedException();
+    public List<Integer> getDifferentElements() {
+        return array.stream().distinct().collect(Collectors.toList());
     }
 
-    public List<Integer> getDifferentElements() {
-        throw new NotImplementedException();
+    public List<Integer> getCommonElements(List<Integer> firstList, List<Integer> secondList) {
+        return firstList.stream().filter(e1 -> secondList.contains(e1)).collect(Collectors.toList());
     }
+
 }
