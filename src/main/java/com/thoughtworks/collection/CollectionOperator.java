@@ -9,6 +9,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CollectionOperator {
+    private List<Integer> convertIntArrayToList(int[] array){
+        List<Integer> list=new ArrayList<>();
+        for (int i:array){
+            list.add(i);
+        }
+        return list;
+    }
+
     public List<Integer> getListByInterval(int left, int right) {
         int small=left<right?left:right;
         int big=left>right?left:right;
@@ -29,12 +37,8 @@ public class CollectionOperator {
     }
 
     public List<Integer> popEvenElments(int[] array) {
-        List<Integer> list=new ArrayList<>();
-        for(int i:array){
-            if (i%2==0)
-                list.add(i);
-        }
-        return list;
+        List<Integer> list=convertIntArrayToList(array);
+        return list.stream().filter(e -> e%2==0).collect(Collectors.toList());
     }
 
     public int popLastElment(int[] array) {
@@ -42,7 +46,10 @@ public class CollectionOperator {
     }
 
     public List<Integer> popCommonElement(int[] firstArray, int[] secondArray) {
-        throw new NotImplementedException();
+        List<Integer> firstList=convertIntArrayToList(firstArray);
+        List<Integer> secondList=convertIntArrayToList(secondArray);
+        firstList.retainAll(secondList);
+        return firstList;
     }
 
     public List<Integer> addUncommonElement(Integer[] firstArray, Integer[] secondArray) {
