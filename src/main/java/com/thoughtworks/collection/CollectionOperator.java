@@ -2,11 +2,23 @@ package com.thoughtworks.collection;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CollectionOperator {
     public List<Integer> getListByInterval(int left, int right) {
-        throw new NotImplementedException();
+        int small=left<right?left:right;
+        int big=left>right?left:right;
+
+        List<Integer> result=new ArrayList<>();
+        for (int i=small;i<=big;i++){
+            result.add(i);
+        }
+        if (left==big){
+            result.sort(Comparator.reverseOrder());
+        }
+        return result;
     }
 
     public List<Integer> getEvenListByIntervals(int left, int right) {
