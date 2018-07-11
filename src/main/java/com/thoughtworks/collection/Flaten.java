@@ -26,6 +26,6 @@ public class Flaten {
     }
 
     public List<Integer> transformToUnrepeatedOneDimesional() {
-        throw new NotImplementedException();
+        return transformToOneDimesional().stream().distinct().collect(Collectors.toList());
     }
 }
