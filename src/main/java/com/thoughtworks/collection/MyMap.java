@@ -2,7 +2,9 @@ package com.thoughtworks.collection;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,18 +24,31 @@ public class MyMap {
     }
 
     public List<String> mapLetter() {
-        return array.stream().map(e->String.valueOf((char)(e+96))).collect(Collectors.toList());
+        return array.stream().map(e->letterList.get(e-1)).collect(Collectors.toList());
     }
 
     public List<String> mapLetters() {
-        throw new NotImplementedException();
+        int len=letterList.size();
+        return array.stream().map(e->{
+            String result=null;
+            e=e-1;
+            if (e>=len){
+                String lower=letterList.get(e%len);
+                String upper=letterList.get((int)(e/len-1));
+                result=upper+lower;
+            }else {
+                result=letterList.get(e);
+            }
+            return result;
+        }).collect(Collectors.toList());
     }
 
     public List<Integer> sortFromBig() {
-        throw new NotImplementedException();
+        return array.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
     }
 
     public List<Integer> sortFromSmall() {
-        throw new NotImplementedException();
+        return array.stream().sorted().collect(Collectors.toList());
+
     }
 }
